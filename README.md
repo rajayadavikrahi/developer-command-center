@@ -2,7 +2,7 @@
 
 A private developer workspace — track **projects & tasks**, capture **notes**, save **bookmarks**, run **focus sessions**, and watch your **developer stats** — served by one Hono API from a React dashboard. Runs locally on PostgreSQL (Prisma 8) and deploys to Cloudflare Workers backed by D1.
 
-**Live demo:** https://developer-command-center.biratnagar.workers.dev
+**Live demo:** https://developer-command-center.biratnagar.workers.dev &nbsp;·&nbsp; **Source:** https://github.com/rajayadavikrahi/developer-command-center
 
 ![Developer Command Center demo](img/demo2.png)
 
