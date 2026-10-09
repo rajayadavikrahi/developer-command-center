@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "developer-command-center",
+  "account_id": "c9e5ecb0773a691f330ef78bf80b71a3",
+  "main": "server/src/worker.ts",
+  "compatibility_date": "2026-07-29",
+  "workers_dev": true,
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./client/dist",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "developer-command-center",
+      "database_id": "f6417b6c-5432-4145-87b9-925878419739",
+      "migrations_dir": "server/migrations"
+    }
+  ]
+}

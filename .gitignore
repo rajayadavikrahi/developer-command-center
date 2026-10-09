@@ -1,0 +1,35 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+out/
+
+# cloudflare / wrangler
+.wrangler/
+
+# env files
+.env
+.env.local
+.env.*.local
+
+# logs
+*.log
+logs/
+
+# caches
+*.tsbuildinfo
+.eslintcache
+.cache/
+
+# OS
+.DS_Store
+
+# editors
+.idea/
+
+# tool-generated skill docs (prisma skills sync)
+.agents/
+.claude/
+.cursor/
+.devin/

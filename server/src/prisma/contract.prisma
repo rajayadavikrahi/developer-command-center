@@ -1,0 +1,111 @@
+// use prisma-8
+//
+// All Developer Command Center models live in the dedicated `dcc` Postgres
+// schema. The Supabase `public` schema is shared with other applications, so
+// we never manage tables there.
+
+namespace dcc {
+  model User {
+    id           String           @id
+    email        String           @unique
+    name         String?
+    passwordHash String
+    createdAt    TimestamptzString(3) @default(now())
+
+    sessions       Session[]
+    projects       Project[]
+    notes          Note[]
+    bookmarks      Bookmark[]
+    codingSessions CodingSession[]
+  }
+
+  model Session {
+    id        String           @id
+    userId    String
+    expiresAt TimestamptzString(3)
+    createdAt TimestamptzString(3) @default(now())
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
+  }
+
+  model Project {
+    id          String  @id
+    userId      String
+    name        String
+    description String?
+    status      String  @default("active")
+    color       String?
+    createdAt   TimestamptzString(3) @default(now())
+    updatedAt   TimestamptzString(3) @default(now())
+
+    user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+    tasks          Task[]
+    codingSessions CodingSession[]
+
+    @@index([userId])
+    @@index([userId, status])
+  }
+
+  model Task {
+    id          String  @id
+    projectId   String
+    userId      String
+    title       String
+    description String?
+    status      String  @default("todo")
+    priority    String  @default("medium")
+    dueAt       TimestamptzString(3)?
+    completedAt TimestamptzString(3)?
+    createdAt   TimestamptzString(3) @default(now())
+
+    project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+    user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([projectId])
+    @@index([userId, status])
+  }
+
+  model Note {
+    id        String  @id
+    userId    String
+    title     String
+    content   String  @default("")
+    createdAt TimestamptzString(3) @default(now())
+    updatedAt TimestamptzString(3) @default(now())
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
+  }
+
+  model Bookmark {
+    id          String  @id
+    userId      String
+    url         String
+    title       String
+    description String?
+    createdAt   TimestamptzString(3) @default(now())
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
+  }
+
+  model CodingSession {
+    id        String  @id
+    userId    String
+    projectId String?
+    note      String?
+    startedAt TimestamptzString(3)
+    endedAt   TimestamptzString(3)?
+    createdAt TimestamptzString(3) @default(now())
+
+    user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    project Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+    @@index([userId])
+    @@index([userId, startedAt])
+  }
+}
