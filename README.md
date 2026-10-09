@@ -6,6 +6,14 @@ A private developer workspace — track **projects & tasks**, capture **notes**,
 
 ![Developer Command Center demo](img/demo2.png)
 
+## Screenshots
+
+| | |
+| --- | --- |
+| ![Screenshot](img/demo1.png) | ![Screenshot](img/demo3.png) |
+| ![Screenshot](img/demo4.png) | ![Screenshot](img/demo5.png) |
+| ![Screenshot](img/demo6.png) | ![Screenshot](img/demo.png) |
+
 ## Features
 
 - **Projects** with per-project task boards and automatic progress (todo / in-progress / done).
